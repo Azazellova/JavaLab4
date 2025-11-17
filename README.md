@@ -371,3 +371,112 @@ Point2D end2D = new Point2D(4.0, 5.0);
 Line&lt;Point2D&gt; line2D = new Line&lt;&gt;(start2D, end2D); 
 System.out.println("Двухмерная линия: " + line2D);</code>
 </pre>
+
+<h2>
+  <p>Задание 2.1</p>
+  <p>Сдвинуть линию</p>
+</h2>
+
+<ul>
+  <li>Создать метод, принимающий Линию из задачи 3.1.5 с любой допустимой параметризацией</li>
+  <li>Метод должен сдвигать начальную точку линии на 10 единиц по оси X</li>
+  <li>Например, если X был 5, то должен стать 15, если X был -7, то должен стать -17</li>
+  <li>Использовать параметризацию, маски типов и их ограничения</li>
+</ul>
+
+<h2>Структура решения</h2>
+
+<h3>Класс Line&lt;T extends Point&gt;</h3>
+<ul>
+  <li><code>private T startPoint</code> - начальная точка линии</li>
+  <li><code>private T endPoint</code> - конечная точка линии</li>
+</ul>
+
+<h3>Параметризация и ограничения</h3>
+<ul>
+  <li>Тип <code>T extends Point</code> гарантирует, что линия может работать только с типами, наследующими от Point</li>
+  <li>Ограничение <code>extends Point</code> обеспечивает наличие методов getX() и setX() у точек</li>
+</ul>
+
+<h2>Методы решения</h2>
+
+<h3>Метод shiftLineX()</h3>
+<pre><code>public void shiftLineX() {
+	T start = this.getStartPoint();
+	T end = this.getEndPoint();
+	start.setX(start.getX() + 10);
+	end.setX(end.getX() + 10);
+}</code></pre>
+
+<h4>Алгоритм работы:</h4>
+<ol>
+  <li>Получить начальную точку линии с помощью <code>getStartPoint()</code></li>
+  <li>Получить конечную точку линии с помощью <code>getEndPoint()</code></li>
+  <li>Вычислить новое значения координат X: <code>старт_X + 10</code> и <code>конеч_X + 10</code></li>
+  <li>Установить новое значения координат X с помощью <code>setX(новое_значение)</code></li>
+</ol>
+
+<h3>Статический метод shiftLineStartX()</h3>
+<pre><code>public static <U extends Point> void shiftLineStartX(Line<U> line) {
+	if (line == null) {
+		throw new IllegalArgumentException("Линия не может быть null");
+	}
+	U start = line.getStartPoint();
+	U end = line.getEndPoint();
+	start.setX(start.getX() + 10);
+	end.setX(end.getX() + 10);
+}</code></pre>
+
+<h4>Алгоритм работы:</h4>
+<ol>
+  <li>Проверить, что переданная линия не равна null</li>
+  <li>Получить начальную точку линии с помощью <code>getStartPoint()</code></li>
+  <li>Получить конечную точку линии с помощью <code>getEndPoint()</code></li>
+  <li>Вычислить новое значения координат X: <code>старт_X + 10</code> и <code>конеч_X + 10</code></li>
+  <li>Установить новое значения координат X с помощью <code>setX(новое_значение)</code></li>
+</ol>
+
+<h2>Принцип работы параметризации</h2>
+
+<h3>Ограничение типов &lt;T extends Point&gt;</h3>
+<ul>
+  <li>Гарантирует, что тип T является подтипом Point</li>
+  <li>Обеспечивает безопасность типов при компиляции</li>
+  <li>Позволяет использовать методы класса Point без явного приведения типов</li>
+</ul>
+
+<h3>Маски типов</h3>
+<ul>
+  <li>Используется ограниченная маска <code>? extends Point</code> для работы с любыми подтипами Point</li>
+  <li>Позволяет методу работать с линиями любых типов точек, наследующих от Point</li>
+</ul>
+
+<h2>Примеры использования</h2>
+
+<h3>Пример 1: Сдвиг линии с Point2D</h3>
+<ul>
+  <li><strong>Создание линии:</strong> <code>Line&lt;Point2D&gt; line = new Line&lt;&gt;(new Point2D(5, 3), new Point2D(10, 8));</code></li>
+  <li><strong>Начальное состояние:</strong> Начальная точка (5, 3)</li>
+  <li><strong>Вызов метода:</strong> <code>line.shiftStartPointX();</code></li>
+  <li><strong>Конечное состояние:</strong> Начальная точка (15, 3)</li>
+</ul>
+
+<h3>Пример 2: Сдвиг линии с Point3D</h3>
+<ul>
+  <li><strong>Создание линии:</strong> <code>Line&lt;Point3D&gt; line = new Line&lt;&gt;(new Point3D(-7, 2, 4), new Point3D(1, 5, 9));</code></li>
+  <li><strong>Начальное состояние:</strong> Начальная точка (-7, 2, 4)</li>
+  <li><strong>Вызов метода:</strong> <code>Line.shiftLineStartX(line);</code></li>
+  <li><strong>Конечное состояние:</strong> Начальная точка (-17, 2, 4)</li>
+</ul>
+
+<h3>Пример 3: Демонстрация полиморфизма</h3>
+<ul>
+  <li><strong>Обобщенный метод:</strong> 
+    <pre><code>public static &lt;T extends Point&gt; void demonstrateShift(Line&lt;T&gt; line) {
+    System.out.println("До сдвига: " + line);
+    line.shiftStartPointX();
+    System.out.println("После сдвига: " + line);
+}</code></pre>
+  </li>
+  <li><strong>Работает с любым типом линии:</strong> Line&lt;Point2D&gt;, Line&lt;Point3D&gt; и другими наследниками Point</li>
+</ul>
