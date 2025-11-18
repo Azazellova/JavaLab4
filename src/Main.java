@@ -217,14 +217,13 @@ public class Main {
                 (s1 == null ? "" : s1) + (s2 == null ? "" : s2));
         System.out.println("Объединенная строка: " + concatenated);
 
-        System.out.println("\n--- 2. Сумма чисел ---");
+        System.out.println("\n--- Сумма чисел ---");
         List<Integer> integers = Validator.inputIntegerList(input);
         Integer sum = Decrease.reduce(integers, 0, (a, b) -> a + b);
         System.out.println("Сумма чисел: " + sum);
 
-        System.out.println("\n--- 3. Общее количество элементов во вложенных списках ---");
+        System.out.println("\n--- Общее количество элементов во вложенных списках ---");
         List<int[]> listOfArrays = Validator.inputArraysList(input);
-
         List<Integer> sizes = new ArrayList<>();
         for (int[] array : listOfArrays) {
             sizes.add(array.length);
