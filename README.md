@@ -162,9 +162,8 @@
 <ul> 
 	<li><code>protected double x</code> - координата X</li> 
 	<li><code>protected double y</code> - координата Y</li> 
-	<li><code>public Point(double x, double y)</code> - конструктор с проверкой на NaN</li> 
+	<li><code>public Point(double x, double y)</code> - конструктор с проверкой на null</li> 
 	<li>Базовые геттеры и сеттеры для координат</li> 
-	<li>Абстрактные методы <code>toString()</code>, <code>equals()</code>, <code>hashCode()</code></li> 
 </ul>
 <h4>Класс Point2D</h4> 
 <ul> 
@@ -179,7 +178,6 @@
 	<li><code>public Point3D(double x, double y, double z)</code> - конструктор трехмерной точки</li> 
 	<li>Геттер и сеттер для координаты Z</li> 
 	<li>Реализация <code>toString()</code> в формате "{x, y, z}"</li> 
-	<li>Переопределенные <code>equals()</code> и <code>hashCode()</code> с учетом координаты Z</li> 
 </ul>
 <h3>Обобщенный класс Line</h3>
 <h4>Объявление класса</h4> 
@@ -297,36 +295,7 @@
 	<li>Вычисляет расстояние между точками в проекции на плоскость XY</li> 
 	<li>Работает с любым типом точки благодаря наличию методов getX() и getY() в базовом классе Point</li> 
 </ul>
-<h2>Методы Object</h2>
-<h3>Метод toString()</h3> 
-<pre><code>@Override public String toString() { 
-	return "Линия от " + startPoint + " до " + endPoint; 
-}</code></pre> 
-<ul> 
-	<li>Возвращает строковое представление линии</li> 
-	<li>Использует toString() точек</li> 
-</ul>
-<h3>Метод equals()</h3> 
-<pre><code>@Override public boolean equals(Object o) { 
-	if (this == o) {
-		return true; 
-	}
-	if (o == null || getClass() != o.getClass()) {
-		return false; Line&lt;?&gt; 
-	}
-	line = (Line&lt;?&gt;) o; 
-	return (startPoint.equals(line.startPoint) && endPoint.equals(line.endPoint)) 
-			|| (startPoint.equals(line.endPoint) && endPoint.equals(line.startPoint)); 
-}</code></pre> 
-<ul> 
-	<li>Сравнивает линии с учетом того, что линия A→B равна линии B→A</li> 
-	<li>Использует wildcard <?> для сравнения линий разных параметризаций</li> 
-</ul>
-<h3>Класс InvalidLineException</h3> 
-<ul> 
-	<li>Наследует от <code>RuntimeException</code></li> 
-	<li>Используется для обработки ошибок связанных с некорректными линиями</li> 
-</ul>
+
 <h2>Алгоритм работы программы</h2>
 <h3>Инициализация системы</h3> 
 <ol> 
