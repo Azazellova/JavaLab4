@@ -102,9 +102,5 @@ public class Line<T extends Point> {
                 (startPoint.equals(line.endPoint) && endPoint.equals(line.startPoint));
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(startPoint, endPoint);
-    }
 }
 

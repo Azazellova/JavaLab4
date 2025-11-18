@@ -91,7 +91,8 @@ public class Main {
 
         System.out.println("Создана линия: " + line2D);
 
-        Line.shiftLineDemo(line2D);
+        line2D.shiftLineX();
+        System.out.println("После сдвига: " + line2D);
 
         System.out.println("\n---- Сдвиг линии с Point3D ----");
 
@@ -109,7 +110,9 @@ public class Main {
 
         System.out.println("Создана линия: " + line3D);
 
-        Line.shiftLineDemo(line3D);
+        Line.shiftLineStartX(line3D);
+
+        System.out.println("После сдвига: " + line3D);
 
         System.out.println("\n==== Задание 3.1 ====");
 

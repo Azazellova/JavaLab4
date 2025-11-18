@@ -23,9 +23,4 @@ public class Point2D extends Point {
         return Double.compare(point2D.x, x) == 0 &&
                 Double.compare(point2D.y, y) == 0;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
-    }
 }

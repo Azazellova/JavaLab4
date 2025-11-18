@@ -31,12 +31,8 @@ public class Point3D extends Point2D {
         if (!super.equals(o)) {
             return false;
         }
-        Point3D point3D = (Point3D) o;//???
+        Point3D point3D = (Point3D) o;
         return Double.compare(point3D.z, z) == 0;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), z);
-    }
 }
