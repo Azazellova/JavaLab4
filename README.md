@@ -6,8 +6,7 @@
 </h2>
 
 <h2>
-  <p>Задание 1.2</p>
-	<p>Без null</p>
+  <p>Задание 1.2 Без null</p>
 </h2>
         <ul> 
           <li>Может хранить один произвольный объект в один момент времени</li> 
@@ -148,8 +147,7 @@
 
 
 <h2> 
-	<p>Задание 1.5</p> 
-	<p>Обобщенная линия</p>
+	<p>Задание 1.5 Обобщенная линия</p> 
 </h2>
 <h3><p>Модификация класса Line для работы с двухмерными и трехмерными точками</p> </h3>
 <ul> 
@@ -373,8 +371,7 @@ System.out.println("Двухмерная линия: " + line2D);</code>
 </pre>
 
 <h2>
-  <p>Задание 2.1</p>
-  <p>Сдвинуть линию</p>
+  <p>Задание 2.1 Сдвинуть линию</p>
 </h2>
 
 <ul>
@@ -457,7 +454,7 @@ System.out.println("Двухмерная линия: " + line2D);</code>
 <ul>
   <li><strong>Создание линии:</strong> <code>Line&lt;Point2D&gt; line = new Line&lt;&gt;(new Point2D(5, 3), new Point2D(10, 8));</code></li>
   <li><strong>Начальное состояние:</strong> Начальная точка (5, 3)</li>
-  <li><strong>Вызов метода:</strong> <code>line.shiftStartPointX();</code></li>
+  <li><strong>Вызов метода:</strong> <code>line.shiftLineX();</code></li>
   <li><strong>Конечное состояние:</strong> Начальная точка (15, 3)</li>
 </ul>
 
@@ -483,8 +480,7 @@ System.out.println("Двухмерная линия: " + line2D);</code>
 
 
 <h2>
-	<p>Задание 3.1</p>
-	<p>Функция</p>
+	<p>Задание 3.1 Функция</p>
 </h2>
 
 <h2>Структура решения</h2>
@@ -583,4 +579,332 @@ System.out.println("Двухмерная линия: " + line2D);</code>
 		<li>Детализированный вывод соответствия массивов и их максимумов</li>
 	</ol>
 
+<h2>
+  <p>Задача 3.2 Фильтры</p>
+</h2>
+
+<ul>
+  <li>Предоставляет статический метод для фильтрации элементов коллекции по заданному условию</li>
+  <li>Работает с любыми типами данных благодаря использованию дженериков</li>
+  <li>Использует функциональный интерфейс Predicate для задания условий фильтрации</li>
+  <li>Возвращает новую коллекцию, не изменяя исходную</li>
+  <li>Поддерживает автовывод типов при использовании</li>
+</ul>
+
+<h2>Структура класса</h2>
+
+<h3>Поля класса</h3>
+<ul>
+  <li>Класс не содержит полей</li>
+</ul>
+
+<h3>Метод test()</h3>
+<pre><code>public static &lt;T&gt; List&lt;T&gt; test(List&lt;T&gt; list, Predicate&lt;T&gt; predicate) {
+    List&lt;T&gt; result = new ArrayList&lt;&gt;();
+    for (T value : list) {
+        if (predicate.test(value)) result.add(value);
+    }
+    return result;
+}</code></pre>
+
+<h4>Алгоритм работы метода test():</h4>
+<ol>
+  <li><strong>Инициализация результата:</strong> Создается новый пустой ArrayList для хранения отфильтрованных элементов</li>
+  <li><strong>Итерация по коллекции:</strong> Для каждого элемента в исходном списке выполняется:
+    <ul>
+      <li>Вызов метода <code>predicate.test(value)</code> с текущим элементом</li>
+      <li>Проверка возвращаемого булевого значения</li>
+    </ul>
+  </li>
+  <li><strong>Добавление элементов:</strong> Если условие возвращает true, элемент добавляется в результирующий список</li>
+  <li><strong>Возврат результата:</strong> Метод возвращает новый список с отфильтрованными элементами</li>
+</ol>
+
+<h4>Параметры метода:</h4>
+<ul>
+  <li><code>List&lt;T&gt; list</code> - исходная коллекция для фильтрации</li>
+  <li><code>Predicate&lt;T&gt; predicate</code> - условие фильтрации в виде функционального интерфейса</li>
+</ul>
+
+<h4>Возвращаемое значение:</h4>
+<ul>
+  <li><code>List&lt;T&gt;</code> - новая коллекция, содержащая только элементы, удовлетворяющие условию</li>
+</ul>
+
+<h2>Принцип работы класса</h2>
+
+<h3>Обобщенное программирование (Generics):</h3>
+<ol>
+  <li>Параметр типа <code>&lt;T&gt;</code> позволяет методу работать с любым типом данных</li>
+  <li>Компилятор обеспечивает типобезопасность на этапе компиляции</li>
+  <li>Автовывод типов позволяет не указывать тип явно при вызове метода</li>
+</ol>
+
+<h3>Функциональный интерфейс Predicate:</h3>
+<ul>
+  <li>Определяет единственный метод <code>test(T t)</code>, возвращающий boolean</li>
+  <li>Позволяет передавать условия фильтрации в виде лямбда-выражений</li>
+</ul>
+
+<h2>Примеры использования</h2>
+
+<h3>Пример 1: Фильтрация строк по длине</h3>
+<ul>
+  <li><strong>Исходные данные:</strong> Список строк: "qwerty", "asdfg", "zx"</li>
+  <li><strong>Условие фильтрации:</strong> Оставить строки длиной 3 символа и менее</li>
+  <li><strong>Реализация:</strong> 
+    <pre><code>List&lt;String&gt; list1 = Validator.inputStringList(input);
+int minLen = Validator.inputPositiveInteger(input,"Введите минимальную длину строки: ");
+List<String> filteredList1 = Filter.test(list1, str -> str.length() < minLen);</code></pre>
+  </li>
+  <li><strong>Ожидаемый результат:</strong> ["zx"]</li>
+</ul>
+
+<h3>Пример 2: Фильтрация чисел по знаку</h3>
+<ul>
+  <li><strong>Исходные данные:</strong> Список чисел: 1, -3, 7</li>
+  <li><strong>Условие фильтрации:</strong> Оставить положительные числа (>= 0)</li>
+  <li><strong>Реализация:</strong>
+    <pre><code>List&lt;Integer&gt; Validator.inputIntegerList(input);
+List&lt;Integer&gt; result = Filter.test(numbers, n -> n <= 0);</code></pre>
+  </li>
+  <li><strong>Ожидаемый результат:</strong> [1, 7]</li>
+</ul>
+
+<h3>Пример 3: Фильтрация массивов чисел</h3>
+<ul>
+  <li><strong>Исходные данные:</strong> Список массивов: [-1, -2], [0, -5], [3, -1]</li>
+  <li><strong>Условие фильтрации:</strong> Оставить массивы без положительных элементов</li>
+  <li><strong>Реализация:</strong>
+    <pre><code>List&lt;int[]&gt; list3 = Validator.inputArraysList(input);
+List&lt;int[]&gt; negFilteredList3 = Filter.test(list3, arr -> {
+   for (int num: arr) {
+	   if (num >= 0) {
+		   return false;
+	   }
+   }</code></pre>
+
+
+<h2>
+  <p>Задание 3.3 Сокращение</p>
+  <p>Без null и исключений для пустого списка</p>
+</h2>
+
+<ul>
+  <li>Преобразует список элементов в одно значение путем последовательного применения бинарной операции</li>
+  <li>Гарантирует возврат корректного значения даже для пустого списка</li>
+  <li>Использует начальное значение (identity) как основу для свертки</li>
+  <li>Поддерживает любые типы данных через механизм дженериков</li>
+  <li>Работает с любыми бинарными операциями, совместимыми с типом элементов</li>
+</ul>
+
+<h2>Структура метода</h2>
+
+<h3>Сигнатура метода</h3>
+<pre><code>public static &lt;T&gt; T reduce(List&lt;T&gt; list, T begin, BinaryOperator&lt;T&gt; union)</code></pre>
+
+<h4>Параметры:</h4>
+<ul>
+  <li><code>List&lt;T&gt; list</code> - список элементов для свертки</li>
+  <li><code>T begin</code> - начальное значение (нейтральный элемент операции)</li>
+  <li><code>BinaryOperator&lt;T&gt; union</code> - бинарная операция для объединения элементов</li>
+</ul>
+
+<h4>Возвращаемое значение:</h4>
+<ul>
+  <li>Результат типа <code>T</code> - свернутое значение списка</li>
+</ul>
+
+<h2>Алгоритм работы метода</h2>
+
+<h3>1. Проверка входных данных</h3>
+<pre><code>if (list == null || list.isEmpty()) {
+	return begin;
+}</code></pre>
+<ul>
+  <li>Проверяется условие <code>list == null || list.isEmpty()</code></li>
+  <li>Если условие истинно:
+    <ul>
+      <li>Метод немедленно возвращает начальное значение <code>begin</code></li>
+      <li>Это гарантирует обработку null и пустых списков без исключений</li>
+    </ul>
+  </li>
+  <li>Если условие ложно - алгоритм продолжает выполнение</li>
+</ul>
+
+<h3>2. Инициализация результата</h3>
+<pre><code>T result = begin;</code></pre>
+<ul>
+  <li>Создается переменная <code>result</code> для хранения промежуточных результатов</li>
+  <li>Инициализируется начальным значением <code>begin</code></li>
+</ul>
+
+<h3>3. Итерация по элементам списка</h3>
+<pre><code>for (T value : list) result = union.apply(result, value);</code></pre>
+<ul>
+  <li>Для каждого элемента <code>value</code> в списке <code>list</code>:
+    <ul>
+      <li>Вызывается метод <code>union.apply(result, value)</code></li>
+      <li>Текущий результат и элемент передаются в бинарную операцию</li>
+      <li>Результат операции сохраняется в переменную <code>result</code></li>
+    </ul>
+  </li>
+  <li>Процесс повторяется для всех элементов списка</li>
+</ul>
+
+<h3>4. Возврат результата</h3>
+<pre><code>return result;</code></pre>
+<ul>
+  <li>После обработки всех элементов возвращается финальное значение <code>result</code></li>
+</ul>
+
+<h2>Примеры использования метода</h2>
+
+<h3>Пример 1: Объединение строк</h3>
+<ul>
+  <li><strong>Исходные данные: Список: ["qwerty", "asdfg", "zx"]</li>
+  <li><strong>Реализация:</strong> <pre><code>List&lt;String&gt; strings1 = Validator.inputStringList(input);
+String concatenated = Decrease.reduce(strings1, "", (s1, s2) ->
+		(s1 == null ? "" : s1) + (s2 == null ? "" : s2));</code></pre></li>
+  <li><strong>Результат:</strong> <code>"qwertyasdfgzx"</code></li>
+</ul>
+
+<h3>Пример 2: Сумма чисел</h3>
+<ul>
+  <li><strong>Исходные данные:</strong> Список [1, -3, 7]</code></li>
+  <li><strong>Реализация:</strong> <pre><code>List&lt;Integer&gt; integers = Validator.inputIntegerList(input);
+Integer sum = Decrease.reduce(integers, 0, (a, b) -> a + b);
+System.out.println("Сумма чисел: " + sum);</code></pre></li>
+  <li><strong>Результат:</strong> <code>5</code></li>
+</ul>
+
+<h3>Пример 3: Подсчет элементов вложенных списков</h3>
+<ul>
+  <li><strong>Исходные данные:</strong> Список массивов: [1, 2, 3], [4, 5], [6, 7, 8, 9]</li>
+  <li><strong>Реализация:</strong> <pre><code>List&lt;int[]&gt; listOfArrays = Validator.inputArraysList(input);
+List<Integer> sizes = new ArrayList<>();
+for (int[] array : listOfArrays) {
+	sizes.add(array.length);
+}</code></pre></li>
+  <li><strong>Результат:</strong> <code>9</code></li>
+</ul>
+
+
+<h2>
+	Задание 3.4 Коллекционирование
+</h2>
+
+<h3>Класс Collections</h3>
+<h3>Назначение класса</h3>
+<ul>
+  <li>Предоставляет универсальный метод для фильтрации и сбора элементов списка в указанную коллекцию</li>
+</ul>
+
+<h2>Структура метода collect</h2>
+<h3>Сигнатура метода</h3>
+<pre><code>public static &lt;T, P extends Collection&lt;T&gt;&gt; P collect(
+    List&lt;T&gt; list, 
+    Supplier&lt;P&gt; collectionFactory, 
+    Predicate&lt;T&gt; filter
+)</code></pre>
+
+<h3>Параметры метода</h3>
+<ul>
+  <li><code>List&lt;T&gt; list</code> - исходный список элементов для обработки</li>
+  <li><code>Supplier&lt;P&gt; collectionFactory</code> - фабрика для создания результирующей коллекции</li>
+  <li><code>Predicate&lt;T&gt; filter</code> - условие фильтрации элементов</li>
+</ul>
+
+<h2>Алгоритм работы метода</h2>
+<ul>
+  <li><strong>Создание коллекции:</strong>
+    <ul>
+      <li>Вызывается метод <code>collectionFactory.get()</code></li>
+      <li>Создается пустая коллекция указанного типа</li>
+    </ul>
+  </li>
+  
+  <li><strong>Итерация по списку:</strong>
+    <ul>
+      <li>Для каждого элемента в исходном списке выполняется проверка</li>
+      <li>Используется цикл for-each: <code>for (T value : list)</code></li>
+    </ul>
+  </li>
+  
+  <li><strong>Фильтрация элементов:</strong>
+    <ul>
+      <li>Для каждого элемента вызывается <code>filter.test(value)</code></li>
+      <li>Если условие возвращает <code>true</code>, элемент добавляется в результирующую коллекцию</li>
+      <li>Если условие возвращает <code>false</code>, элемент пропускается</li>
+    </ul>
+  </li>
+  
+  <li><strong>Добавление элемента:</strong>
+    <ul>
+      <li>Прошедшие фильтрацию элементы добавляются методом <code>result.add(value)</code></li>
+    </ul>
+  </li>
+  
+  <li><strong>Возврат результата:</strong>
+    <ul>
+      <li>После обработки всех элементов возвращается заполненная коллекция</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Примеры использования метода</h2>
+
+<h3>Пример 1: Разделение чисел на положительные и отрицательные</h3>
+<ul>
+  <li><strong>Исходные данные:</strong> Список: [1, -3, 7]</li>
+  <li><strong>Реализация:</strong> 
+    <pre><code>List&lt;Integer&gt; numbers = Validator.inputIntegerList(scanner);
+List&lt;Integer&gt; positive = Collecting.collect(numbers, ArrayList::new, num -> num > 0);
+List&lt;Integer&gt; negative = Collecting.collect(numbers, ArrayList::new, num -> num < 0);</code></pre>
+  </li>
+  <li><strong>Результат:</strong> 
+    <ul>
+      <li>Положительные: [1, 7]</li>
+      <li>Отрицательные: [-3]</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Пример 2: Группировка строк по длине</h3>
+<ul>
+  <li><strong>Исходные данные:</strong> Список: ["qwerty", "asdfg", "zx", "qw"]</li>
+  <li><strong>Реализация:</strong> 
+    <pre><code>Set<Integer> lengthsList5 = new HashSet<>();
+for (String s : list5) {
+	if (s != null) {
+		lengthsList5.add(s.length());
+	}
+}
+
+Map<Integer, List&lt;String&gt; colList5 = new HashMap<>();
+for (Integer len : lengthsList5) {
+	List&lt;String&gt; group = Collections.collect(list5, ArrayList::new,
+			str -> str != null && str.length() == len);
+	colList5.put(len, group);
+}</code></pre>
+  </li>
+  <li><strong>Результат:</strong> 
+    <ul>
+      <li>Длина 2: ["zx", "qw"]</li>
+      <li>Длина 5: ["asdfg"]</li>
+      <li>Длина 6: ["qwerty"]</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>Пример 3: Удаление дубликатов строк</h3>
+<ul>
+  <li><strong>Исходные данные:</strong> Список: ["qwerty", "asdfg", "qwerty", "qw"]</li>
+  <li><strong>Реализация:</strong> 
+    <pre><code>ListCollection&lt;String&gt; list6 = Validator.inputStringList(input);
+Collection&lt;String&gt; colList6 = Collections.collect(list6, HashSet::new, str -> true);
+</code></pre>
+  </li>
+  <li><strong>Результат:</strong> ["qwerty", "asdfg", "qw"]</li>
+</ul>
 
