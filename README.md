@@ -435,19 +435,6 @@ System.out.println("Двухмерная линия: " + line2D);</code>
   <li><strong>Конечное состояние:</strong> Начальная точка (-17, 2, 4)</li>
 </ul>
 
-<h3>Пример 3: Демонстрация полиморфизма</h3>
-<ul>
-  <li><strong>Обобщенный метод:</strong> 
-    <pre><code>public static &lt;T extends Point&gt; void demonstrateShift(Line&lt;T&gt; line) {
-    System.out.println("До сдвига: " + line);
-    line.shiftStartPointX();
-    System.out.println("После сдвига: " + line);
-}</code></pre>
-  </li>
-  <li><strong>Работает с любым типом линии:</strong> Line&lt;Point2D&gt;, Line&lt;Point3D&gt; и другими наследниками Point</li>
-</ul>
-
-
 <h2>
 	<p>Задание 3.1 Функция</p>
 </h2>
