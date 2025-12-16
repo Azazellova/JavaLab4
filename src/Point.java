@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 public abstract class Point {
     protected double x;
     protected double y;

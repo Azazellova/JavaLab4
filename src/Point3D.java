@@ -1,4 +1,3 @@
-import java.util.Objects;
 
 public class Point3D extends Point2D {
     private double z;

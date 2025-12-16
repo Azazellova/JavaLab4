@@ -51,6 +51,22 @@ public class Validator {
         return value;
     }
 
+    public static int inputIntegerInRange(Scanner input, int a, int b, String prompt) {
+        int min = Math.min(a, b);
+        int max = Math.max(a, b);
+
+        while (true) {
+            int value = inputInteger(input, prompt);
+
+            if (value >= min && value <= max) {
+                return value;
+            } else {
+                System.out.println("Ошибка ввода. Число не находится в диапазоне от " + min + " до " + max + ".");
+                System.out.print("Повторите ввод: ");
+            }
+        }
+    }
+
     public static int inputMark(Scanner input, String prompt) {
         int value;
         while (true) {

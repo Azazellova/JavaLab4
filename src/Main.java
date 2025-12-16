@@ -5,7 +5,55 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        System.out.println("\n ==== Задание 1.2 ====");
+        while (true) {
+            System.out.println("\n==== МЕНЮ ====");
+            System.out.println("1. Задание 1.2 - Хранилище чисел и строк");
+            System.out.println("2. Задание 1.5 - Точки и линии (2D/3D)");
+            System.out.println("3. Задание 2.1 - Сдвиг линии");
+            System.out.println("4. Задание 3.1 - Преобразование элементов");
+            System.out.println("5. Задание 3.2 - Фильтрация элементов");
+            System.out.println("6. Задание 3.3 - Свертка элементов");
+            System.out.println("7. Задание 3.4 - Сборка коллекций");
+            System.out.println("0. Выход");
+
+            int choice = Validator.inputIntegerInRange(input, 0, 7, "Выберите задание: ");
+
+            switch (choice) {
+                case 1:
+                    task1_2(input);
+                    break;
+                case 2:
+                    task1_5(input);
+                    break;
+                case 3:
+                    task2_1(input);
+                    break;
+                case 4:
+                    task3_1(input);
+                    break;
+                case 5:
+                    task3_2(input);
+                    break;
+                case 6:
+                    task3_3(input);
+                    break;
+                case 7:
+                    task3_4(input);
+                    break;
+                case 0:
+                    System.out.println("Выход из программы...");
+                    input.close();
+                    return;
+            }
+
+            System.out.println("\nНажмите Enter чтобы продолжить...");
+            input.nextLine();
+        }
+    }
+
+    // Задание 1.2 - Хранилище чисел и строк
+    private static void task1_2(Scanner input) {
+        System.out.println("\n==== Задание 1.2 ====");
         System.out.println("1. Хранилище чисел с null");
 
         Integer number1 = Validator.inputIntegerWithNull(input,"Введите основное число: ");
@@ -41,10 +89,74 @@ public class Main {
 
         stringStorage2.printValue();
         System.out.println("Информация: " + stringStorage2);
+    }
 
+    // Задание 1.5 - Точки и линии (2D/3D)
+    private static void task1_5(Scanner input) {
         System.out.println("\n ==== Задание 1.5 ====");
 
-        System.out.println("\n==== Двумерные точки ====");
+        // Объявляем переменные в начале метода
+        double startX2D = 0.0, startY2D = 0.0;
+        Point2D start2D = null;
+        double endX2D = 0.0, endY2D = 0.0;
+        Point2D end2D = null;
+        Line<Point2D> line2D = null;
+
+        double startX3D = 0.0, startY3D = 0.0, startZ3D = 0.0;
+        Point3D start3D = null;
+        double endX3D = 0.0, endY3D = 0.0, endZ3D = 0.0;
+        Point3D end3D = null;
+        Line<Point3D> line3D = null;
+
+        int pointType = Validator.inputIntegerInRange(input,0,2,
+                "Введите тип точки:\n1 - 2D\n2 - 3D\n0 - Выход из задания: ");
+
+        switch (pointType) {
+            case 1: {
+                startX2D = Validator.inputDouble(input,"Введите X начальной точки: ");
+                startY2D = Validator.inputDouble(input,"Введите Y начальной точки: ");
+                start2D = new Point2D(startX2D, startY2D);
+
+                endX2D = Validator.inputDouble(input,"Введите X конечной точки: ");
+                endY2D = Validator.inputDouble(input,"Введите Y конечной точки: ");
+                end2D = new Point2D(endX2D, endY2D);
+
+                line2D = new Line<>(start2D, end2D);
+
+                System.out.println("Двухмерная линия: " + line2D);
+                System.out.println("Расстояние: " + line2D.getDistance());
+                break;
+            }
+            case 2: {
+                startX3D = Validator.inputDouble(input,"Введите X начальной точки: ");
+                startY3D = Validator.inputDouble(input,"Введите Y начальной точки: ");
+                startZ3D = Validator.inputDouble(input,"Введите Z начальной точки: ");
+                start3D = new Point3D(startX3D, startY3D, startZ3D);
+
+                endX3D = Validator.inputDouble(input,"Введите X конечной точки: ");
+                endY3D = Validator.inputDouble(input,"Введите Y конечной точки: ");
+                endZ3D = Validator.inputDouble(input,"Введите Z конечной точки: ");
+                end3D = new Point3D(endX3D, endY3D, endZ3D);
+
+                line3D = new Line<>(start3D, end3D);
+
+                System.out.println("Трехмерная линия: " + line3D);
+                System.out.println("Расстояние (проекция на плоскость XY): " + line3D.getDistance());
+                break;
+            }
+            case 0: {
+                System.out.println("Выход из задания...");
+                return;
+            }
+        }
+    }
+
+    // Задание 2.1 - Сдвиг линии
+    private static void task2_1(Scanner input) {
+        System.out.println("\n ==== Задание 2.1 ====");
+
+        System.out.println("\n---- Сдвиг линии с Point2D -----");
+
         double startX2D = Validator.inputDouble(input,"Введите X начальной точки: ");
         double startY2D = Validator.inputDouble(input,"Введите Y начальной точки: ");
         Point2D start2D = new Point2D(startX2D, startY2D);
@@ -55,10 +167,13 @@ public class Main {
 
         Line<Point2D> line2D = new Line<>(start2D, end2D);
 
-        System.out.println("Двухмерная линия: " + line2D);
-        System.out.println("Расстояние: " + line2D.getDistance());
+        System.out.println("Создана линия: " + line2D);
 
-        System.out.println("\n==== Трехмерные точки ====");
+        line2D.shiftLineX();
+        System.out.println("После сдвига: " + line2D);
+
+        System.out.println("\n---- Сдвиг линии с Point3D ----");
+
         double startX3D = Validator.inputDouble(input,"Введите X начальной точки: ");
         double startY3D = Validator.inputDouble(input,"Введите Y начальной точки: ");
         double startZ3D = Validator.inputDouble(input,"Введите Z начальной точки: ");
@@ -71,49 +186,15 @@ public class Main {
 
         Line<Point3D> line3D = new Line<>(start3D, end3D);
 
-        System.out.println("\nТрехмерная линия: " + line3D);
-        System.out.println("Расстояние (проекция на плоскость XY): " + line3D.getDistance());
-
-        System.out.println("\n ==== Задание 2.1 ====");
-
-        System.out.println("\n---- Сдвиг линии с Point2D -----");
-
-        startX2D = Validator.inputDouble(input,"Введите X начальной точки: ");
-        startY2D = Validator.inputDouble(input,"Введите Y начальной точки: ");
-        start2D = new Point2D(startX2D, startY2D);
-
-        endX2D = Validator.inputDouble(input,"Введите X конечной точки: ");
-        endY2D = Validator.inputDouble(input,"Введите Y конечной точки: ");
-        end2D = new Point2D(endX2D, endY2D);
-
-
-        line2D = new Line<>(start2D, end2D);
-
-        System.out.println("Создана линия: " + line2D);
-
-        line2D.shiftLineX();
-        System.out.println("После сдвига: " + line2D);
-
-        System.out.println("\n---- Сдвиг линии с Point3D ----");
-
-        startX3D = Validator.inputDouble(input,"Введите X начальной точки: ");
-        startY3D = Validator.inputDouble(input,"Введите Y начальной точки: ");
-        startZ3D = Validator.inputDouble(input,"Введите Z начальной точки: ");
-        start3D = new Point3D(startX3D, startY3D, startZ3D);
-
-        endX3D = Validator.inputDouble(input,"Введите X конечной точки: ");
-        endY3D = Validator.inputDouble(input,"Введите Y конечной точки: ");
-        endZ3D = Validator.inputDouble(input,"Введите Z конечной точки: ");
-        end3D = new Point3D(endX3D, endY3D, endZ3D);
-
-        line3D = new Line<>(start3D, end3D);
-
         System.out.println("Создана линия: " + line3D);
 
         Line.shiftLineStartX(line3D);
 
         System.out.println("После сдвига: " + line3D);
+    }
 
+    // Задание 3.1 - Преобразование элементов
+    private static void task3_1(Scanner input) {
         System.out.println("\n==== Задание 3.1 ====");
 
         System.out.println("\n--- Преобразование: Строки -> Длины строк ---");
@@ -136,12 +217,12 @@ public class Main {
         List<Integer> absValues = FunctionApply.apply(numbers, Math::abs);
 
         System.out.println("\nРезультат: ");
-        System.out.println("Исходные строки: " + numbers);
-        System.out.println("Длины строк: " + absValues);
+        System.out.println("Исходные числа: " + numbers);
+        System.out.println("Абсолютные значения: " + absValues);
 
         System.out.println("\nДетали:");
-        for (int i = 0; i < strings.size(); i++) {
-            System.out.printf("'%s' -> %d%n", numbers.get(i), absValues.get(i));
+        for (int i = 0; i < numbers.size(); i++) {
+            System.out.printf("%d -> %d%n", numbers.get(i), absValues.get(i));
         }
 
         System.out.println("\n--- Преобразование: Массивы -> Максимальные значения ---");
@@ -169,7 +250,10 @@ public class Main {
             System.out.printf("%s -> %d%n",
                     Arrays.toString(arrays.get(i)), maxValues.get(i));
         }
+    }
 
+    // Задание 3.2 - Фильтрация элементов
+    private static void task3_2(Scanner input) {
         System.out.println("\n==== Задание 3.2 ====");
 
         System.out.println("\n--- Фильтрация строк ---");
@@ -194,11 +278,11 @@ public class Main {
 
         List<int[]> list3 = Validator.inputArraysList(input);
         List<int[]> negFilteredList3 = Filter.test(list3, arr -> {
-           for (int num: arr) {
-               if (num >= 0) {
-                   return false;
-               }
-           }
+            for (int num: arr) {
+                if (num >= 0) {
+                    return false;
+                }
+            }
             return true;
         });
 
@@ -211,7 +295,10 @@ public class Main {
         for (int i = 0; i < negFilteredList3.size(); i++) {
             System.out.println("  Массив " + (i + 1) + ": " + Arrays.toString(negFilteredList3.get(i)));
         }
+    }
 
+    // Задание 3.3 - Свертка элементов
+    private static void task3_3(Scanner input) {
         System.out.println("\n==== Задание 3.3 ====");
 
         System.out.println("\n--- Объединение строк ---");
@@ -234,7 +321,10 @@ public class Main {
 
         Integer totalElements = Decrease.reduce(sizes, 0, (a, b) -> a + b);
         System.out.println("Общее количество элементов во всех массивах: " + totalElements);
+    }
 
+    // Задание 3.4 - Сборка коллекций
+    private static void task3_4(Scanner input) {
         System.out.println("\n==== Задание 3.4 ====");
 
         System.out.println("\n--- Разделение чисел на положительные и отрицательные ---");

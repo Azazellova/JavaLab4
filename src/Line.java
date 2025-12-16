@@ -72,12 +72,6 @@ public class Line<T extends Point> {
         end.setX(end.getX() + 10);
     }
 
-    public static <U extends Point> void shiftLineDemo(Line<U> line) {
-        System.out.println("До сдвига: " + line);
-        line.shiftLineX();
-        System.out.println("После сдвига: " + line);
-    }
-
     public double getDistance() {
         double deltaX = endPoint.getX() - startPoint.getX();
         double deltaY = endPoint.getY() - startPoint.getY();
